@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chess</title>
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+  <table id="chessboard"></table>
+
+  <form>
+    <br><input type="text" id="move" name="move" placeholder="Move ex: (e6 e4)"><br>
+
+    <script>
+      const keyPress = document.getElementById("move");
+      keyPress.addEventListener("keypress",function(event) {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          moveRequest();
+          clearText();
+        }
+      });
+    </script>
+
+  </form>
+  <table id="score">
+    <tr>
+      <td>Score: </td>
+    </tr>
+  </table>
+
+  <script>
+    const imageUrls = {
+        whitePawn: "{% static 'images/White Pawn.png' %}",
+        blackPawn: "{% static 'images/Black Pawn.png' %}",
+        whiteRook: "{% static 'images/White Rook.png' %}",
+        blackRook: "{% static 'images/Black Rook.png' %}",
+        whiteKnight: "{% static 'images/White Knight.png' %}",
+        blackKnight: "{% static 'images/Black Knight.png' %}",
+        whiteBishop: "{% static 'images/White Bishop.png' %}",
+        blackBishop: "{% static 'images/Black Bishop.png' %}",
+        whiteQueen: "{% static 'images/White Queen.png' %}",
+        blackQueen: "{% static 'images/Black Queen.png' %}",
+        whiteKing: "{% static 'images/White King.png' %}",
+        blackKing: "{% static 'images/Black King.png' %}"
+    };
+</script>
+
+  <script type="text/javascript" src="{% static 'main.js' %}"></script>
+</body>
+</html>
