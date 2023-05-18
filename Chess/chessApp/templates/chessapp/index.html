@@ -36,6 +36,10 @@
   </table>
 
   <script>
+    var board = "{{ board.content }}";
+    var whites_turn  = "{{ board.whites_turn }}" === "True" ? true : false;
+    console.log(board);
+    console.log(whites_turn);
     const imageUrls = {
         whitePawn: "{% static 'images/White Pawn.png' %}",
         blackPawn: "{% static 'images/Black Pawn.png' %}",
@@ -51,7 +55,8 @@
         blackKing: "{% static 'images/Black King.png' %}"
     };
 </script>
+<script src="{% static 'main.js' %}"></script>
 
-  <script type="text/javascript" src="{% static 'main.js' %}"></script>
+  
 </body>
 </html>
