@@ -9,9 +9,6 @@ def index(request):
         new_board.save()
 
     board = Board.objects.get()
-
-    board_str: str = board.content
-    print('board_str:', board_str)
     
     return render(request, 'chessapp/index.html', {
         'board': board,
@@ -28,25 +25,22 @@ def move(request, move: str) -> redirect:
             board.append([])
         
         board[-1].append(board_str[i])
-    
-    
+
     i1: int = int(move[0])
     j1: int = int(move[1])
     i2: int = int(move[2])
     j2: int = int(move[3])
     
-    new_board, new_whites_turn = update_board(board, i1, j1, i2, j2, whites_turn)
-
-    new_board_str: str = ' '
+    new_board, new_whites_turn, new_mate = update_board(board, i1, j1, i2, j2, whites_turn)
+    print('checkmate', new_mate)
+    new_board_str: str = ''
     for i in range(64):
         new_board_str += new_board[i // 8][i % 8]
     
-    #new_board_str = ' ' * 64
     board_model.content = new_board_str
     board_model.whites_turn = new_whites_turn
+    board_model.checkmate = new_mate
     board_model.save()
-
-    print('new str:', new_board_str)
 
     return redirect('index')
 

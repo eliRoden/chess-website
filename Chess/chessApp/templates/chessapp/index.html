@@ -14,32 +14,27 @@
 <body>
   <table id="chessboard"></table>
 
-  <form>
-    <br><input type="text" id="move" name="move" placeholder="Move ex: (e6 e4)"><br>
-
-    <script>
-      const keyPress = document.getElementById("move");
-      keyPress.addEventListener("keypress",function(event) {
-        if (event.key === "Enter") {
-          event.preventDefault();
-          moveRequest();
-          clearText();
-        }
-      });
-    </script>
-
-  </form>
   <table id="score">
     <tr>
       <td>Score: </td>
+    </tr>
+    <tr>
+      <td>Turn: </td>
+      <td>
+        {% if board.whites_turn %}
+          White
+        {% else %}
+          Black
+        {% endif %}
+      </td>
     </tr>
   </table>
 
   <script>
     var board = "{{ board.content }}";
     var whites_turn  = "{{ board.whites_turn }}" === "True" ? true : false;
-    console.log(board);
-    console.log(whites_turn);
+    var checkmate  = "{{ board.checkmate }}" === "True" ? true : false;
+
     const imageUrls = {
         whitePawn: "{% static 'images/White Pawn.png' %}",
         blackPawn: "{% static 'images/Black Pawn.png' %}",

@@ -1,5 +1,6 @@
  
 function print(boardString) {
+
   let boardArr = [];
   for (let i = 0; i < 8; i++) {
     let row = []
@@ -127,3 +128,11 @@ function print(boardString) {
 }
 
 print(board);
+
+if (checkmate) {
+  if (whites_turn) {
+    alert("White is in checkmate,\nBlack wins!");
+  } else {
+    alert("Black is in checkmate,\nWhite wins!");
+  }
+}
