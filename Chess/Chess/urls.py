@@ -22,4 +22,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('move/<str:move>', views.move, name='move'),
+    path('newgame', views.new_game, name='new_game'),
 ]

@@ -88,3 +88,19 @@ td:first-child {
   left: 45px;
 }
 
+#newGame {
+  display: flex;
+  position: relative;
+  top: 350px;
+  width: 80px;
+  left: 250px;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid rgb(255, 255, 255);
+  border-width: 1px;
+  border-radius: 8px;
+  height: 30px;
+  width: 100px;
+
+}
+

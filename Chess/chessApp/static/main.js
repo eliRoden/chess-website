@@ -19,7 +19,7 @@ function print(boardString) {
 
   const row = table.insertRow(0);
   row.setAttribute("id", "topRow");
-  let emptyCell = row.insertCell(0);
+  row.insertCell(0);
   let clickCount = 0;
   
   for (let l = 1; l < 9; l++) {
