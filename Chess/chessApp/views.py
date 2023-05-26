@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Board
 from .game_util import *
 
-# Create your views here.
+
 def index(request):
     if Board.objects.count() == 0:
         new_board = Board()
@@ -13,6 +13,7 @@ def index(request):
     return render(request, 'chessapp/index.html', {
         'board': board,
     })
+
 
 def move(request, move: str) -> redirect:
     board_model: Board = Board.objects.get()
@@ -79,4 +80,9 @@ def move(request, move: str) -> redirect:
     board_model.black_king_moved = new_black_king_moved
     board_model.save()
 
+    return redirect('index')
+
+
+def new_game(request):
+    Board.objects.all().delete()
     return redirect('index')
