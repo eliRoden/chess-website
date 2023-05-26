@@ -179,15 +179,12 @@ def update_board(
         )
 
     if not valid_move_piece(board[i1][j1], i1, j1, i2 , j2):
-        # print('valid_move_piece failed')
         return previous_state
     
     if not is_valid_move(deepcopy(board), i1, j1, i2, j2, whites_turn):
-        # print('is_valid_move failed')
         return previous_state
     
     if not is_valid_check(deepcopy(board), i1, j1, i2, j2, whites_turn):
-        # print('is_valid_check failed')
         return previous_state
 
     if i1 == 0 and j1 == 0:
@@ -271,7 +268,9 @@ def is_valid_move(board: list[list[str]], i1: int, j1: int, i2: int, j2: int, wh
         return False
     elif board[i2][j2] != ' ' and ((board[i1][j1].islower() and board[i2][j2].islower()) or (board[i1][j1].isupper() and board[i2][j2].isupper())):
         return False
-    elif (piece == 'p' or piece == 'P') and j1 != j2 and board[j1][j2] == None:
+    elif (piece == 'p' or piece == 'P') and j1 != j2 and board[i2][j2] == ' ':
+        return False
+    elif (piece == 'p' or piece == 'P') and j1 == j2 and board[i2][j2] != ' ':
         return False 
     elif not valid_move_piece(piece, i1, j1, i2, j2): 
         return False
@@ -294,7 +293,6 @@ def in_check(board: list[list[str]], whites_turn: bool) -> bool:
     
     for i, row in enumerate(board):
         for j, piece in enumerate(row):
-            # print('     ', i, j,is_valid_move(board, i, j, ki, kj, not whites_turn))
             if is_valid_move(board, i, j, ki, kj, not whites_turn):
                 if piece == 'n' or piece == 'N':
                     return True
@@ -455,24 +453,14 @@ def in_check(board: list[list[str]], whites_turn: bool) -> bool:
 
 def checkmate(board: list[list[str]], whites_turn: bool) -> bool:
     if not in_check(board, whites_turn):
-        # print('not check')
         return False
 
-    ki, kj = 0, 0
-    for i in range(len(board)):
-        for j in range(len(board[i])):
-            if board[i][j] != None and board[i][j].islower() and whites_turn:
-                ki, kj = i, j
-                break
-    
-    for i in range(ki-1, ki+2):
-        for j in range(kj-1, kj+2):
-            if is_valid_move(deepcopy(board), ki, kj, i, j, whites_turn) and is_valid_check(deepcopy(board), ki, kj, i, j):
-                # print('valid move found')
-                return False
-    
-    
-    
+    for i1 in range(8):
+        for j1 in range(8):
+            for i2 in range(8):
+                for j2 in range(8):
+                    if valid_move_piece(board[i1][j1], i1, j1, i2 , j2) and is_valid_move(deepcopy(board), i1, j1, i2, j2, whites_turn) and is_valid_check(deepcopy(board), i1, j1, i2, j2, whites_turn):
+                        return False
     
     return True
 
