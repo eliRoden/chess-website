@@ -12,23 +12,20 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
-  <table id="chessboard"></table>
+  <div id="blackScore">
 
-  <table id="score">
-    <tr>
-      <td>Score: </td>
-    </tr>
-    <tr>
-      <td>Turn: </td>
-      <td>
-        {% if board.whites_turn %}
-          White
-        {% else %}
-          Black
-        {% endif %}
-      </td>
-    </tr>
-  </table>
+  </div>
+  <table id="chessboard"></table>
+  <div id="whiteScore">
+    
+  </div>
+  <div id="turn">
+    Turn: {% if board.whites_turn %}
+    White
+  {% else %}
+    Black
+  {% endif %}
+  </div>
 
   <script>
     var board = "{{ board.content }}";

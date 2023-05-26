@@ -18,6 +18,7 @@ function print(boardString) {
   }
 
   const row = table.insertRow(0);
+  row.setAttribute("id", "topRow");
   let emptyCell = row.insertCell(0);
   let clickCount = 0;
   
@@ -25,7 +26,6 @@ function print(boardString) {
     let cell = row.insertCell(l);
     let letter = document.createTextNode(String.fromCharCode(l+64));
     cell.appendChild(letter);
-    cell.setAttribute("class","topRow");
   }
   for (let i = 0; i < 8; i++) {
     const row = document.createElement('tr');
@@ -107,24 +107,64 @@ function print(boardString) {
     }
     table.appendChild(row);
   }
+  
+  let whiteScore = 0, blackScore = 0
+  for (let i = 0; i < boardString.length; i++) {
+    if (boardString.charAt(i) === ' ') continue;
+    if (boardString.charAt(i).toLowerCase() === boardString.charAt(i)) {
+      switch (boardString.charAt(i)) {
+        case 'p':
+          whiteScore += 1;
+          break;
+        case 'n':
+        case 'b':
+          whiteScore += 3;
+          break;
+        case 'r':
+          whiteScore += 5;
+          break;
+        case 'q':
+          whiteScore += 9;
+          break;
+      }
+    }
+    else {
+      switch (boardString.charAt(i)) {
+        case 'P':
+          blackScore += 1;
+          break;
+        case 'N':
+        case 'B':
+          blackScore += 3;
+          break;
+        case 'R':
+          blackScore += 5;
+          break;
+        case 'Q':
+          blackScore += 9;
+          break;
+      }
+    }
+  }
 
   let whiteScoreDif, blackScoreDif
-  if (this.whiteScore > this.blackScore) {
-    whiteScoreDif = "+" + String(this.whiteScore - this.blackScore);
-    blackScoreDif = "";
-  } else if (this.blackScore > this.whiteScore) {
-    blackScoreDif = "+" + String(this.blackScore - this.whiteScore);
-    whiteScoreDif = "";
+  if (whiteScore > blackScore) {
+    whiteScoreDif = "+" + String(whiteScore - blackScore);
+    blackScoreDif = " ";
+  } else if (blackScore > whiteScore) {
+    blackScoreDif = "+" + String(blackScore - whiteScore);
+    whiteScoreDif = " ";
   } else {
-    whiteScoreDif = "";
-    blackScoreDif = "";
+    whiteScoreDif = " ";
+    blackScoreDif = " ";
   }
-  console.log(whiteScoreDif + " " + blackScoreDif);
-  const scoreTable = document.getElementById("score");
-  const scoreRow = scoreTable.insertRow();
-  let scoreCell = scoreRow.insertCell();
-  let score = document.createTextNode(whiteScoreDif+" "+blackScoreDif);
-  scoreCell.appendChild(score);
+
+  let bScoreDiv = document.getElementById('blackScore');
+  let bScoreText = document.createTextNode(blackScoreDif);
+  bScoreDiv.appendChild(bScoreText);
+  let wScoreDiv = document.getElementById('whiteScore');
+  let wScoreText = document.createTextNode(whiteScoreDif);
+  wScoreDiv.appendChild(wScoreText);
 }
 
 print(board);
@@ -133,6 +173,6 @@ if (checkmate) {
   if (whites_turn) {
     alert("White is in checkmate,\nBlack wins!");
   } else {
-    alert("Black is in checkmate,\White wins!");
+    alert("Black is in checkmate,\nWhite wins!");
   }
 }

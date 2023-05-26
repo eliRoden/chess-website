@@ -18,6 +18,13 @@ def move(request, move: str) -> redirect:
     board_model: Board = Board.objects.get()
     whites_turn: bool = board_model.whites_turn
     board_str: str = board_model.content
+    left_white_rook_moved: bool = board_model.left_white_rook_moved
+    right_white_rook_moved: bool = board_model.right_white_rook_moved
+    white_king_moved: bool = board_model.white_king_moved
+    left_black_rook_moved: bool = board_model.left_black_rook_moved
+    right_black_rook_moved: bool = board_model.right_black_rook_moved
+    black_king_moved: bool = board_model.black_king_moved
+
     board: list[list[str]] = []
     
     for i in range(64):
@@ -31,8 +38,32 @@ def move(request, move: str) -> redirect:
     i2: int = int(move[2])
     j2: int = int(move[3])
     
-    new_board, new_whites_turn, new_mate = update_board(board, i1, j1, i2, j2, whites_turn)
-    print('checkmate', new_mate)
+    (
+        new_board, 
+        new_whites_turn, 
+        new_mate, 
+        new_left_white_rook_moved,
+        new_right_white_rook_moved,
+        new_white_king_moved,
+        new_left_black_rook_moved,
+        new_right_black_rook_moved,
+        new_black_king_moved,
+    ) = update_board(
+        board, 
+        i1, 
+        j1, 
+        i2, 
+        j2, 
+        whites_turn,
+        left_white_rook_moved,
+        right_white_rook_moved,
+        white_king_moved,
+        left_black_rook_moved,
+        right_black_rook_moved,
+        black_king_moved,
+    )
+
+
     new_board_str: str = ''
     for i in range(64):
         new_board_str += new_board[i // 8][i % 8]
@@ -40,7 +71,12 @@ def move(request, move: str) -> redirect:
     board_model.content = new_board_str
     board_model.whites_turn = new_whites_turn
     board_model.checkmate = new_mate
+    board_model.left_white_rook_moved = new_left_white_rook_moved
+    board_model.right_white_rook_moved = new_right_white_rook_moved
+    board_model.white_king_moved = new_white_king_moved
+    board_model.left_black_rook_moved = new_left_black_rook_moved
+    board_model.right_black_rook_moved = new_right_black_rook_moved
+    board_model.black_king_moved = new_black_king_moved
     board_model.save()
 
     return redirect('index')
-

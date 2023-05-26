@@ -58,15 +58,33 @@ td:first-child {
   color: rgb(127,127,143);
   font-size: 12pt;
 }
-.topRow {
+#topRow > td {
   border: none;
   vertical-align: bottom;
   font-size: 12pt;
   padding-bottom: 5px;
   color: rgb(127,127,143);
+  height: 20px;
 }
 
 .highlight {
   background-color: rgba(73, 70, 255, 0.6);
+}
+
+#whiteScore, #blackScore {
+  position: relative;
+  right: 250px;
+  height: 20px;
+}
+
+#blackScore {
+  padding: 15px;
+  top: 0px;
+}
+
+#turn {
+  position: relative;
+  top: 30px;
+  left: 45px;
 }
 
