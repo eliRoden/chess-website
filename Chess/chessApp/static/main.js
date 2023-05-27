@@ -16,28 +16,31 @@ function print(boardString) {
   while (table.rows.length > 0) {
     table.deleteRow(0);
   }
-
-  const row = table.insertRow(0);
-  row.setAttribute("id", "topRow");
-  row.insertCell(0);
   let clickCount = 0;
   
-  for (let l = 1; l < 9; l++) {
-    let cell = row.insertCell(l);
-    let letter = document.createTextNode(String.fromCharCode(l+64));
-    cell.appendChild(letter);
-  }
   for (let i = 0; i < 8; i++) {
     const row = document.createElement('tr');
-    let newCell = row.insertCell(0);
+    /*let newCell = row.insertCell(0);
     let text = document.createTextNode(i);
-    newCell.appendChild(text);
+    newCell.appendChild(text);*/
     for (let j = 0; j < 8; j++) {
       const cell = document.createElement('td');
       if ((i + j) % 2 === 0) {
         cell.classList.add('white');
       } else {
         cell.classList.add('black');
+      }
+      if (i === 7) {
+        let div = document.createElement("div");
+        div.textContent = String.fromCharCode(j+65);
+        div.classList.add('letters');
+        cell.appendChild(div);
+      }
+      if (j === 0) {
+        let div = document.createElement("div");
+        div.textContent = i;
+        div.classList.add("numbers");
+        cell.appendChild(div);
       }
       if (boardArr[i][j] != " ") {
         const img = document.createElement('img');

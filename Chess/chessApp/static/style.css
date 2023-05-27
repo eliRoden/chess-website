@@ -8,14 +8,9 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
 
-input[type=text] {
-  border: 2px solid rgb(255, 255, 255);
-  border-width: 1px;
-  margin-left: 90px;
-}
 
 body {
-  font-family: 'Roboto Mono', monospace;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 table {
@@ -24,11 +19,12 @@ table {
   margin-right: auto;
 }
 td {
-  width: 75px;
-  height: 75px;
+  width: 80px;
+  height: 80px;
   text-align: center;
   vertical-align: middle;
   border: 1px solid rgb(255, 255, 255);
+  position: relative;
 }
 .white {
   background-color: #6670b1;
@@ -48,16 +44,10 @@ img {
 }
 
 
-chessboard {
+#chessboard {
   border-collapse: collapse;
 }
-td:first-child {
-  border: none;
-  text-align: right;
-  padding-right: 15px;
-  color: rgb(127,127,143);
-  font-size: 12pt;
-}
+
 #topRow > td {
   border: none;
   vertical-align: bottom;
@@ -73,19 +63,21 @@ td:first-child {
 
 #whiteScore, #blackScore {
   position: relative;
-  right: 250px;
+  right: 310px;
   height: 20px;
 }
 
 #blackScore {
   padding: 15px;
-  top: 0px;
+  top: 30px;
+  height: 15px;
+  vertical-align: bottom;
 }
 
 #turn {
   position: relative;
   top: 30px;
-  left: 45px;
+  left: 8px;
 }
 
 #newGame {
@@ -101,6 +93,45 @@ td:first-child {
   border-radius: 8px;
   height: 30px;
   width: 100px;
-
 }
 
+#newGame:hover {
+  background-color: rgb(65, 65, 65);
+}
+
+.letters {
+  font-size: 14pt;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-weight: 500;
+  margin-right: 3px;
+  background-color: inherit;
+}
+
+.numbers {
+  font-size: 14pt;
+  position: absolute;
+  top: 0;
+  left: 0;
+  font-weight: 500;
+  margin-left: 3px;
+  background-color: inherit;
+}
+
+.white .letters, .white .numbers {
+  color: #1d2557;
+}
+
+.black > .letters, .black .numbers {
+  color: #6670b1;
+}
+
+.piece {
+  text-align: center;
+}
+
+.piece img {
+  position: relative;
+  display:block;
+}
