@@ -12,21 +12,19 @@
   <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div id="blackScore">
-
-  </div>
+  <div id="blackScore"></div>
   <table id="chessboard"></table>
-  <div id="whiteScore">
-    
+  <div id="whiteScore"></div>
+  <div id="sidebar">
+    <button id="newGame" onclick="window.location.href='{% url 'new_game' %}'">New Game</button>
+    <div id="turn">
+      Turn: {% if board.whites_turn %}
+      White
+    {% else %}
+      Black
+    {% endif %}
+    </div>
   </div>
-  <div id="turn">
-    Turn: {% if board.whites_turn %}
-    White
-  {% else %}
-    Black
-  {% endif %}
-  </div>
-
   <script>
     var board = "{{ board.content }}";
     var whites_turn  = "{{ board.whites_turn }}" === "True" ? true : false;

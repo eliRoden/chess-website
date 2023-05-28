@@ -1,5 +1,6 @@
 *{
   background-color: rgb(32, 32, 36);
+  /*background-color: #2c313a;*/
   color: rgb(255, 255, 255);
   text-align: center;
   margin: 0;
@@ -11,6 +12,8 @@
 
 body {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  display:grid;
+  height: 100%;
 }
 
 table {
@@ -19,8 +22,8 @@ table {
   margin-right: auto;
 }
 td {
-  width: 80px;
-  height: 80px;
+  width: 85px;
+  height: 85px;
   text-align: center;
   vertical-align: middle;
   border: 1px solid rgb(255, 255, 255);
@@ -46,16 +49,12 @@ img {
 
 #chessboard {
   border-collapse: collapse;
+  margin-left:auto;
+  margin-right:auto;
+  vertical-align:middle;
+  height: 100%;
 }
 
-#topRow > td {
-  border: none;
-  vertical-align: bottom;
-  font-size: 12pt;
-  padding-bottom: 5px;
-  color: rgb(127,127,143);
-  height: 20px;
-}
 
 .highlight {
   background-color: rgba(73, 70, 255, 0.6);
@@ -63,36 +62,53 @@ img {
 
 #whiteScore, #blackScore {
   position: relative;
-  right: 310px;
-  height: 20px;
+  right: 324px;
+  padding: 15px;
+  text-align: left;
+  width: 20px;
+  margin:auto;
+  height: 15px;
 }
 
 #blackScore {
-  padding: 15px;
-  top: 30px;
-  height: 15px;
+  margin-top: 10px;
   vertical-align: bottom;
+  padding-top: 20px;
 }
+
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  width: 200px;
+  height: 200px;
+  position: relative;
+  bottom: 734px;
+  right: 500px;
+  margin: auto;
+  border: 1px solid white;
+  padding-top: 50px;
+  border-radius: 7px;
+}
+
 
 #turn {
   position: relative;
-  top: 30px;
-  left: 8px;
+  top: 80px;
+  font-size: 20px;
+  text-align: center;
+  width: 220px;
+  height: 30px;
 }
 
 #newGame {
-  display: flex;
-  position: relative;
-  top: 350px;
-  width: 80px;
-  left: 250px;
-  justify-content: center;
-  align-items: center;
+  width: 150px;
   border: 2px solid rgb(255, 255, 255);
   border-width: 1px;
   border-radius: 8px;
-  height: 30px;
-  width: 100px;
+  height: 40px;
+  font-size: 20px;
 }
 
 #newGame:hover {
