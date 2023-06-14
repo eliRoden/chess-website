@@ -16,14 +16,9 @@ body {
   height: 100%;
 }
 
-table {
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-}
 td {
-  width: 85px;
-  height: 85px;
+  width: 5.5rem;
+  height: 5.5rem;
   text-align: center;
   vertical-align: middle;
   border: 1px solid rgb(255, 255, 255);
@@ -36,8 +31,8 @@ td {
   background-color: #1d2557;
 }
 .piece {
-  max-width: 100%;
-  max-height: 100%;
+  width: 60%;
+  height: 60%;
 }
 
 img {
@@ -49,8 +44,6 @@ img {
 
 #chessboard {
   border-collapse: collapse;
-  margin-left:auto;
-  margin-right:auto;
   vertical-align:middle;
   height: 100%;
 }
@@ -61,8 +54,9 @@ img {
 }
 
 #whiteScore, #blackScore {
+  display:flex;
   position: relative;
-  right: 324px;
+  right: 21.5em;
   padding: 15px;
   text-align: left;
   width: 20px;
@@ -81,29 +75,28 @@ img {
   flex-direction: column;
   align-items: center;
   padding: 10px;
-  width: 200px;
+  width: 18%;
   height: 200px;
-  position: relative;
-  bottom: 734px;
-  right: 500px;
-  margin: auto;
   border: 1px solid white;
   padding-top: 50px;
   border-radius: 7px;
+  margin: 45px;
+  margin-top: 0px;
+  max-width: 175px;
 }
-
 
 #turn {
   position: relative;
   top: 80px;
   font-size: 20px;
   text-align: center;
-  width: 220px;
+  width: 80%;
   height: 30px;
 }
 
 #newGame {
-  width: 150px;
+  width: 80%;
+  min-width:125px;
   border: 2px solid rgb(255, 255, 255);
   border-width: 1px;
   border-radius: 8px;
@@ -143,11 +136,73 @@ img {
   color: #6670b1;
 }
 
-.piece {
-  text-align: center;
+#middle {
+  display: flex;
+  justify-content:center;
+  position: relative;
+  right: 9em
 }
 
-.piece img {
-  position: relative;
-  display:block;
+@media (max-width: 1050px) {
+  td {
+    height: 7.5vw;
+    width: 7.5vw;
+  }
+  
+  #sidebar {
+    flex-direction: row;
+    width: 59%;
+    height: 0;
+    max-width: unset;
+    z-index: 2;
+  }
+
+  #newGame {
+    width: 60%;
+    bottom: 20px;
+    position: relative;
+    height: 30px;
+  }
+
+  #turn {
+    top: unset;
+    bottom: 18px;
+    font-size: 18px;
+  }
+
+  #middle {
+    left: 0em;
+    flex-direction: column;
+    align-items: center;
+    bottom: 25px;
+  }
+
+  #whiteScore, 
+  #blackScore {
+    right: 29%;
+    height: 2px;
+  }
+
+  #blackScore {
+    top: 4.5em;
+    z-index: 1;
+  }
+
+  #whiteScore {
+    bottom: 1em;
+    padding: 0;
+  }
+
+}
+
+@media (max-width: 700px) {
+  td {
+    height: 9vw;
+    width: 9vw;
+  }
+
+  #whiteScore, 
+  #blackScore {
+    right: 35%;
+  }
 }

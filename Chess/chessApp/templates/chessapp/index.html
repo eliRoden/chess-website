@@ -13,18 +13,20 @@
 </head>
 <body>
   <div id="blackScore"></div>
-  <table id="chessboard"></table>
-  <div id="whiteScore"></div>
-  <div id="sidebar">
-    <button id="newGame" onclick="window.location.href='{% url 'new_game' %}'">New Game</button>
-    <div id="turn">
-      Turn: {% if board.whites_turn %}
-      White
-    {% else %}
-      Black
-    {% endif %}
+  <div id="middle">
+    <div id="sidebar">
+      <button id="newGame" onclick="window.location.href='{% url 'new_game' %}'">New Game</button>
+      <div id="turn">
+        Turn: {% if board.whites_turn %}
+        White
+      {% else %}
+        Black
+      {% endif %}
+      </div>
     </div>
+    <table id="chessboard"></table>
   </div>
+  <div id="whiteScore"></div>
   <script>
     var board = "{{ board.content }}";
     var whites_turn  = "{{ board.whites_turn }}" === "True" ? true : false;
