@@ -59,6 +59,7 @@ img {
   right: 21.5em;
   padding: 1em;
   margin: auto;
+  height: 1em;
 }
 
 #blackScore {
@@ -90,6 +91,7 @@ img {
   width: 80%;
   height: 30px;
   color: aliceblue;
+  font-weight: 500;
 }
 
 #newGame {
@@ -182,7 +184,7 @@ img {
   }
 
   #blackScore {
-    top: 4.5em;
+    top: 5.25em;
     z-index: 1;
   }
 
@@ -196,8 +198,6 @@ img {
   td {
     height: 7.8vw;
     width: 7.8vw;
-    min-width: 10%;
-    max-height: 10%;
   }
   
   #sidebar {
