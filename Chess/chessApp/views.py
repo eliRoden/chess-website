@@ -4,18 +4,10 @@ from .game_util import *
 
 
 def index(request):
-    if Board.objects.count() == 0:
-        new_board = Board()
-        new_board.save()
-
-    board = Board.objects.get()
-    
-    return render(request, 'chessapp/index.html', {
-        'board': board,
-    })
+    return render(request, 'chessapp/index.html')
 
 
-def move(request, move: str) -> redirect:
+def move(request, game_id: str, move: str) -> redirect:
     board_model: Board = Board.objects.get()
     whites_turn: bool = board_model.whites_turn
     board_str: str = board_model.content
@@ -27,7 +19,6 @@ def move(request, move: str) -> redirect:
     black_king_moved: bool = board_model.black_king_moved
 
     board: list[list[str]] = []
-    
     for i in range(64):
         if i % 8 == 0:
             board.append([])
@@ -80,8 +71,19 @@ def move(request, move: str) -> redirect:
     board_model.black_king_moved = new_black_king_moved
     board_model.save()
 
-    return redirect('index')
+    return redirect('game', game_id)
 
+
+def game(request, game_id: str):
+    if Board.objects.count() == 0:
+        new_board = Board()
+        new_board.save()
+
+    board = Board.objects.get()
+    return render(request, 'chessapp/game.html', {
+        'game_id': game_id,
+        'board': board,
+    })
 
 def new_game(request):
     Board.objects.all().delete()

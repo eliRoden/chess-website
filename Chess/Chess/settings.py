@@ -25,7 +25,10 @@ SECRET_KEY = 'django-insecure--zb3@+-d=t9&4h_(47z_gb*sedk&8=1@##l#0g6s%eel_&h^@_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.0.3',
+    '127.0.0.1'
+]
 
 
 # Application definition
@@ -70,6 +73,14 @@ TEMPLATES = [
 ]
 
 ASGI_APPLICATION = 'Chess.asgi.application'
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [("127.0.0.1", 6379)],
+        },
+    },
+}
 
 
 # Database
@@ -126,3 +137,4 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

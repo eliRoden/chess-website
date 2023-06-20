@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  {% load static %}
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chess</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+  <div id="blackScore"></div>
+  <div id="middle">
+    <div id="sidebar">
+      <button class="new-game" onclick="window.location.href='{% url 'new_game' %}'">New Game</button>
+      <div id="turn">
+        Turn: {% if board.whites_turn %}
+        White
+      {% else %}
+        Black
+      {% endif %}
+      </div>
+    </div>
+    <table id="chessboard"></table>
+  </div>
+  <div id="whiteScore"></div>
+
+  {{ game_id|json_script:"game-id" }}
+  <script>
+    const gameID = JSON.parse(document.getElementById('game-id').textContent);
+
+    const gameSocket = new WebSocket(
+        'ws://'
+        + window.location.host
+        + '/ws/game/'
+        + gameID
+        + '/'
+    );
+
+    gameSocket.onmessage = function(e) {
+        const data = JSON.parse(e.data);
+        window.location.pathname = 'game/' + gameID + '/move/' + data.message;
+    };
+
+    gameSocket.onclose = function(e) {
+        console.error('Game socket closed unexpectedly');
+    };
+
+    var board = "{{ board.content }}";
+    var whites_turn  = "{{ board.whites_turn }}" === "True" ? true : false;
+    var checkmate  = "{{ board.checkmate }}" === "True" ? true : false;
+
+    const imageUrls = {
+        whitePawn: "{% static 'images/White Pawn.png' %}",
+        blackPawn: "{% static 'images/Black Pawn.png' %}",
+        whiteRook: "{% static 'images/White Rook.png' %}",
+        blackRook: "{% static 'images/Black Rook.png' %}",
+        whiteKnight: "{% static 'images/White Knight.png' %}",
+        blackKnight: "{% static 'images/Black Knight.png' %}",
+        whiteBishop: "{% static 'images/White Bishop.png' %}",
+        blackBishop: "{% static 'images/Black Bishop.png' %}",
+        whiteQueen: "{% static 'images/White Queen.png' %}",
+        blackQueen: "{% static 'images/Black Queen.png' %}",
+        whiteKing: "{% static 'images/White King.png' %}",
+        blackKing: "{% static 'images/Black King.png' %}"
+    };
+    </script>
+
+    <script src="{% static 'main.js' %}"></script>
+
+</body>
+</html>

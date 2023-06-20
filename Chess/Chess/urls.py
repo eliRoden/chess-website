@@ -21,6 +21,7 @@ from chessApp import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('move/<str:move>', views.move, name='move'),
+    path('game/<str:game_id>/move/<str:move>', views.move, name='move'),
+    path('game/<str:game_id>/', views.game, name='game'),
     path('newgame', views.new_game, name='new_game'),
 ]

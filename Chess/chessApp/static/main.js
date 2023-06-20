@@ -1,6 +1,5 @@
  
 function print(boardString) {
-
   let boardArr = [];
   for (let i = 0; i < 8; i++) {
     let row = []
@@ -20,9 +19,6 @@ function print(boardString) {
   
   for (let i = 0; i < 8; i++) {
     const row = document.createElement('tr');
-    /*let newCell = row.insertCell(0);
-    let text = document.createTextNode(i);
-    newCell.appendChild(text);*/
     for (let j = 0; j < 8; j++) {
       const cell = document.createElement('td');
       if ((i + j) % 2 === 0) {
@@ -94,8 +90,9 @@ function print(boardString) {
                     let cBound = c.getBoundingClientRect();
 
                     if (x >= cBound.left && x <= cBound.right && y >= cBound.top && y <= cBound.bottom) {
-                      window.location.href = '/move/' + pieceI+pieceJ+l+m;
-                      //moveRequest( pieceI, pieceJ, l, m);
+                      gameSocket.send(JSON.stringify({
+                        'message': "" + pieceI+pieceJ+l+m
+                    }));
                       document.getElementById(pieceI+" "+pieceJ).classList.remove("highlight");
                       break;
                     }
@@ -163,11 +160,9 @@ function print(boardString) {
   }
 
   let bScoreDiv = document.getElementById('blackScore');
-  let bScoreText = document.createTextNode(blackScoreDif);
-  bScoreDiv.appendChild(bScoreText);
+  bScoreDiv.textContent = blackScoreDif;
   let wScoreDiv = document.getElementById('whiteScore');
-  let wScoreText = document.createTextNode(whiteScoreDif);
-  wScoreDiv.appendChild(wScoreText);
+  wScoreDiv.textContent = whiteScoreDif;
 }
 
 print(board);

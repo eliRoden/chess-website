@@ -94,7 +94,7 @@ img {
   font-weight: 500;
 }
 
-#newGame {
+.new-game {
   width: 80%;
   min-width:125px;
   border: 1px solid #6670b1;
@@ -105,7 +105,7 @@ img {
   color: aliceblue;
 }
 
-#newGame:hover {
+.new-game:hover {
   background-color: rgb(65, 65, 65);
 }
 
@@ -158,7 +158,7 @@ img {
     z-index: 2;
   }
 
-  #newGame {
+  .new-game {
     width: 60%;
     bottom: 20px;
     position: relative;

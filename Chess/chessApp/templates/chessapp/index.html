@@ -1,54 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  {% load static %}
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Chess</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{% static 'style.css' %}">
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chess</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
 </head>
 <body>
-  <div id="blackScore"></div>
-  <div id="middle">
-    <div id="sidebar">
-      <button id="newGame" onclick="window.location.href='{% url 'new_game' %}'">New Game</button>
-      <div id="turn">
-        Turn: {% if board.whites_turn %}
-        White
-      {% else %}
-        Black
-      {% endif %}
-      </div>
-    </div>
-    <table id="chessboard"></table>
-  </div>
-  <div id="whiteScore"></div>
-  <script>
-    var board = "{{ board.content }}";
-    var whites_turn  = "{{ board.whites_turn }}" === "True" ? true : false;
-    var checkmate  = "{{ board.checkmate }}" === "True" ? true : false;
+    <h2>Create Game</h2>
+    <input id="create-game-input" type="text" size="100" placeholder="Create game ID">
+    <input id="create-game-submit" class="new-game" type="button" value="Enter"><br>
+    
+    <script>
+      document.querySelector('#create-game-input').focus();
+      document.querySelector('#create-game-input').onkeyup = function(e) {
+          if (e.keyCode === 13) {  
+              document.querySelector('#create-game-submit').click();
+          }
+      };
 
-    const imageUrls = {
-        whitePawn: "{% static 'images/White Pawn.png' %}",
-        blackPawn: "{% static 'images/Black Pawn.png' %}",
-        whiteRook: "{% static 'images/White Rook.png' %}",
-        blackRook: "{% static 'images/Black Rook.png' %}",
-        whiteKnight: "{% static 'images/White Knight.png' %}",
-        blackKnight: "{% static 'images/Black Knight.png' %}",
-        whiteBishop: "{% static 'images/White Bishop.png' %}",
-        blackBishop: "{% static 'images/Black Bishop.png' %}",
-        whiteQueen: "{% static 'images/White Queen.png' %}",
-        blackQueen: "{% static 'images/Black Queen.png' %}",
-        whiteKing: "{% static 'images/White King.png' %}",
-        blackKing: "{% static 'images/Black King.png' %}"
-    };
-</script>
-<script src="{% static 'main.js' %}"></script>
+      document.querySelector('#create-game-submit').onclick = function(e) {
+          var roomName = document.querySelector('#create-game-input').value;
+          window.location.href = '/game/' + roomName + '/';
+      };
+    </script>
 
-  
+    <h3>Or</h3>
+    <h2>Join Game</h2>
+    <input id="find-game-input" type="text" size="100" placeholder="Enter game ID">
+    <input id="find-game-submit" class="new-game" type="button" value="Enter">
+
+    <script>
+      document.querySelector('#find-game-input').focus();
+      document.querySelector('#find-game-input').onkeyup = function(e) {
+          if (e.keyCode === 13) {  
+              document.querySelector('#find-game-submit').click();
+          }
+      };
+
+      document.querySelector('#find-game-submit').onclick = function(e) {
+          var roomName = document.querySelector('#find-game-input').value;
+          window.location.href = '/game/' + roomName + '/';
+      };
+    </script>
+
 </body>
 </html>
