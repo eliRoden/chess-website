@@ -200,7 +200,13 @@ def update_board(
     if i1 == 7 and j1 == 7:
         right_white_rook_moved = True
 
-    board[i2][j2] = board[i1][j1]
+    if board[i1][j1] == 'p' and i2 == 0:
+        board[i2][j2] = 'q'
+    elif board[i1][j1] == 'P' and i2 == 7:
+        board[i2][j2] = 'Q'
+    else:
+        board[i2][j2] = board[i1][j1]
+
     board[i1][j1] = ' '
 
     mate = checkmate(deepcopy(board), not whites_turn)
@@ -216,8 +222,6 @@ def update_board(
         right_black_rook_moved,
         black_king_moved,
     )
-
-
 
 
 def valid_move_piece(piece: str, i1: int, j1: int, i2: int, j2: int) -> Optional[bool]:
@@ -279,7 +283,13 @@ def is_valid_move(board: list[list[str]], i1: int, j1: int, i2: int, j2: int, wh
 
 
 def is_valid_check(board: list[list[str]], i1: int, j1: int, i2: int, j2, whites_turn: bool) -> bool:
-    board[i2][j2] = board[i1][j1]
+    if board[i1][j1] == 'p' and i2 == 0:
+        board[i2][j2] = 'q'
+    elif board[i1][j1] == 'P' and i2 == 7:
+        board[i2][j2] = 'Q'
+    else:
+        board[i2][j2] = board[i1][j1]
+
     board[i1][j1] = ' '
 
     return not in_check(board, whites_turn)
