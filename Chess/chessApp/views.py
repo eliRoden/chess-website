@@ -2,13 +2,22 @@ from django.shortcuts import render, redirect
 from .models import Board
 from .game_util import *
 
-
 def index(request):
-    return render(request, 'chessapp/index.html')
+    if request.method == "POST":
+        game_id = request.POST.get('game_id')
+        game = Board.objects.filter(game_id=game_id).first()
+
+        if not game:
+            game = Board(game_id=game_id)
+            game.save()    
+              
+        return redirect('/game/' + game_id)     
+    else:
+        return render(request, 'chessapp/index.html')
 
 
 def move(request, game_id: str, move: str) -> redirect:
-    board_model: Board = Board.objects.get()
+    board_model: Board = Board.objects.filter(game_id=game_id).first()
     whites_turn: bool = board_model.whites_turn
     board_str: str = board_model.content
     left_white_rook_moved: bool = board_model.left_white_rook_moved
@@ -75,16 +84,18 @@ def move(request, game_id: str, move: str) -> redirect:
 
 
 def game(request, game_id: str):
-    if Board.objects.count() == 0:
-        new_board = Board()
-        new_board.save()
+    board = Board.objects.filter(game_id=game_id).first()
 
-    board = Board.objects.get()
+    if not board:
+        board = Board()
+        board.game_id = game_id
+        board.save()
+    
     return render(request, 'chessapp/game.html', {
         'game_id': game_id,
         'board': board,
     })
 
-def new_game(request):
-    Board.objects.all().delete()
-    return redirect('index')
+def new_game(request, game_id: str):
+    Board.objects.filter(game_id=game_id).delete()
+    return redirect('/game/' + game_id)     

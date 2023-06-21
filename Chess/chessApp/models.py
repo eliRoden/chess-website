@@ -2,6 +2,8 @@ from django.db import models
 
 # Create your models here.
 class Board(models.Model):
+    game_id = models.CharField(max_length=100, default='default')
+
     content = models.CharField(max_length = 64, default=("RNBQKBNR" + "P" * 8 + " "*32 + "p" * 8 + "rnbqkbnr"))
     whites_turn = models.BooleanField(default = True)
     checkmate = models.BooleanField(default = False)
