@@ -22,10 +22,11 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  border: 1px solid aliceblue;
+  border: 1px solid rgb(145, 145, 145);
   width: 50%;
   height: 50%;
   border-radius: 12px;
+  background-color: #2a2b3c;
 }
 
 #create-game,
@@ -34,11 +35,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: inherit;
 }
 
 #create-game > h2, #find-game > h2 {
   margin-bottom: 0.5em;
   font-size: 2.25em;
+  background-color: inherit;
+}
+
+#start-game > h3 {
+  background-color: inherit;
 }
 
 #find-game-input,
