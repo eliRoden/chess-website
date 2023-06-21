@@ -12,6 +12,63 @@ body {
   height: 100svh;
 }
 
+#home-page {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#start-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border: 1px solid aliceblue;
+  width: 50%;
+  height: 50%;
+  border-radius: 12px;
+}
+
+#create-game,
+#find-game {
+  margin: auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#create-game > h2, #find-game > h2 {
+  margin-bottom: 0.5em;
+  font-size: 2.25em;
+}
+
+#find-game-input,
+#create-game-input {
+  width: 60%;
+  height: 2em;
+  border: 2px solid #6670b1;
+  border-radius: 5px;
+  margin-bottom: 0.75em;
+}
+
+#find-game-submit,
+#create-game-submit {
+  width: 30%;
+  height: 2em;
+  border: transparent;
+  border-radius: 4px;
+  background-color: rgb(65, 65, 65);
+}
+
+#find-game-submit:hover,
+#create-game-submit:hover {
+  border: 1px solid rgb(145, 145, 145);
+}
+
+#find-game-input:hover,
+#create-game-input:hover {
+  background-color: rgb(65, 65, 65);
+}
+
 td {
   width: 5.5rem;
   height: 5.5rem;
