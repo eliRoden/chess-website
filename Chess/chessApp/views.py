@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Board
 from .game_util import *
 
+
 def index(request):
     if request.method == "POST":
         game_id = request.POST.get('game_id')
@@ -10,8 +11,8 @@ def index(request):
         if not game:
             game = Board(game_id=game_id)
             game.save()    
-              
-        return redirect('/game/' + game_id)     
+        
+        return redirect('game', game_id)
     else:
         return render(request, 'chessapp/index.html')
 
@@ -84,13 +85,15 @@ def move(request, game_id: str, move: str) -> redirect:
 
 
 def game(request, game_id: str):
-    board = Board.objects.filter(game_id=game_id).first()
+    if game_id == 'default':
+        return render(request, 'chessapp/index.html')
 
+    board = Board.objects.filter(game_id=game_id).first()
     if not board:
         board = Board()
         board.game_id = game_id
         board.save()
-    
+
     return render(request, 'chessapp/game.html', {
         'game_id': game_id,
         'board': board,
@@ -98,4 +101,4 @@ def game(request, game_id: str):
 
 def new_game(request, game_id: str):
     Board.objects.filter(game_id=game_id).delete()
-    return redirect('/game/' + game_id)     
+    return redirect('game', game_id)

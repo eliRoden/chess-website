@@ -26,6 +26,9 @@
 
       document.querySelector('#create-game-submit').onclick = function(e) {
           var roomName = document.querySelector('#create-game-input').value;
+          if (roomName.length === 0) {
+            roomName = 'default';
+          }
           window.location.href = '/game/' + roomName + '/';
       };
     </script>
@@ -45,6 +48,9 @@
 
       document.querySelector('#find-game-submit').onclick = function(e) {
           var roomName = document.querySelector('#find-game-input').value;
+          if (roomName.length === 0) {
+            roomName = 'default';
+          }
           window.location.href = '/game/' + roomName + '/';
       };
     </script>
