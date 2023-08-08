@@ -9,3 +9,9 @@ Features
 - New game button to start a fresh chess game.
 - Turn indicator to display the current player's turn.
 - Score tracker to monitor who's winning.
+
+Technologies Used
+- Django: Backend framework for handling game logic and data.
+- Channels: Real-time communication and updates between players.
+- JavaScript: Front-end interactivity and real-time gameplay.
+- CSS: Responsive design for varying screen sizes.
