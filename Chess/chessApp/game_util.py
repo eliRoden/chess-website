@@ -1,8 +1,8 @@
 from copy import deepcopy
-from typing import Optional
+from typing import Optional, List
 
 def update_board(
-    board: list[list[str]],
+    board: List[List[str]],
     i1: int, j1: int,
     i2: int,
     j2: int,
