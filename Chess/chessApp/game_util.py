@@ -1,5 +1,5 @@
 from copy import deepcopy
-from typing import Optional, List
+from typing import Optional, List, Tuple
 
 def update_board(
     board: List[List[str]],
@@ -13,7 +13,7 @@ def update_board(
     left_black_rook_moved: bool,
     right_black_rook_moved: bool,
     black_king_moved: bool,
-) -> tuple[list[list[str]], bool, bool, bool, bool, bool, bool, bool, bool]:
+) -> Tuple[List[List[str]], bool, bool, bool, bool, bool, bool, bool, bool]:
     previous_state = (
         board, 
         whites_turn, 
@@ -262,7 +262,7 @@ def valid_move_piece(piece: str, i1: int, j1: int, i2: int, j2: int) -> Optional
         return None
     
 
-def is_valid_move(board: list[list[str]], i1: int, j1: int, i2: int, j2: int, whites_turn) -> bool:
+def is_valid_move(board: List[List[str]], i1: int, j1: int, i2: int, j2: int, whites_turn) -> bool:
     piece: str = board[i1][j1]
     if (whites_turn and piece.isupper()) or (not whites_turn and piece.islower()):
         return False
@@ -282,7 +282,7 @@ def is_valid_move(board: list[list[str]], i1: int, j1: int, i2: int, j2: int, wh
         return True
 
 
-def is_valid_check(board: list[list[str]], i1: int, j1: int, i2: int, j2, whites_turn: bool) -> bool:
+def is_valid_check(board: List[List[str]], i1: int, j1: int, i2: int, j2, whites_turn: bool) -> bool:
     if board[i1][j1] == 'p' and i2 == 0:
         board[i2][j2] = 'q'
     elif board[i1][j1] == 'P' and i2 == 7:
@@ -295,7 +295,7 @@ def is_valid_check(board: list[list[str]], i1: int, j1: int, i2: int, j2, whites
     return not in_check(board, whites_turn)
 
 
-def in_check(board: list[list[str]], whites_turn: bool) -> bool:
+def in_check(board: List[List[str]], whites_turn: bool) -> bool:
     for i, row in enumerate(board):
         for j, piece in enumerate(row):
             if (whites_turn and piece == 'k') or (not whites_turn and piece == 'K'):
@@ -461,7 +461,7 @@ def in_check(board: list[list[str]], whites_turn: bool) -> bool:
                         return True
 
 
-def checkmate(board: list[list[str]], whites_turn: bool) -> bool:
+def checkmate(board: List[List[str]], whites_turn: bool) -> bool:
     if not in_check(board, whites_turn):
         return False
 
@@ -476,7 +476,7 @@ def checkmate(board: list[list[str]], whites_turn: bool) -> bool:
 
 
 def can_castle(
-    board: list[list[str]], 
+    board: List[List[str]], 
     whites_turn: bool,
     left_white_rook_moved: bool,
     right_white_rook_moved: bool,
