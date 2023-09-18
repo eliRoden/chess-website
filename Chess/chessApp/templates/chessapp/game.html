@@ -37,7 +37,7 @@
         + window.location.host
         + '/ws/game/'
         + gameID
-        + '/'
+        + '8001/'
     );
 
     gameSocket.onmessage = function(e) {
@@ -54,21 +54,24 @@
     var checkmate  = "{{ board.checkmate }}" === "True" ? true : false;
 
     const imageUrls = {
-        whitePawn: "{% static 'images/White Pawn.png' %}",
-        blackPawn: "{% static 'images/Black Pawn.png' %}",
-        whiteRook: "{% static 'images/White Rook.png' %}",
-        blackRook: "{% static 'images/Black Rook.png' %}",
-        whiteKnight: "{% static 'images/White Knight.png' %}",
-        blackKnight: "{% static 'images/Black Knight.png' %}",
-        whiteBishop: "{% static 'images/White Bishop.png' %}",
-        blackBishop: "{% static 'images/Black Bishop.png' %}",
-        whiteQueen: "{% static 'images/White Queen.png' %}",
-        blackQueen: "{% static 'images/Black Queen.png' %}",
-        whiteKing: "{% static 'images/White King.png' %}",
-        blackKing: "{% static 'images/Black King.png' %}"
+        whitePawn: "{% static 'images/White Pawn.png' %}".replace(/&amp;/g, '&'),
+        blackPawn: "{% static 'images/Black Pawn.png' %}".replace(/&amp;/g, '&'),
+        whiteRook: "{% static 'images/White Rook.png' %}".replace(/&amp;/g, '&'),
+        blackRook: "{% static 'images/Black Rook.png' %}".replace(/&amp;/g, '&'),
+        whiteKnight: "{% static 'images/White Knight.png' %}".replace(/&amp;/g, '&'),
+        blackKnight: "{% static 'images/Black Knight.png' %}".replace(/&amp;/g, '&'),
+        whiteBishop: "{% static 'images/White Bishop.png' %}".replace(/&amp;/g, '&'),
+        blackBishop: "{% static 'images/Black Bishop.png' %}".replace(/&amp;/g, '&'),
+        whiteQueen: "{% static 'images/White Queen.png' %}".replace(/&amp;/g, '&'),
+        blackQueen: "{% static 'images/Black Queen.png' %}".replace(/&amp;/g, '&'),
+        whiteKing: "{% static 'images/White King.png' %}".replace(/&amp;/g, '&'),
+        blackKing: "{% static 'images/Black King.png' %}".replace(/&amp;/g, '&')
     };
     </script>
 
+    <!-- jquery -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js" integrity="sha512-WNLxfP/8cVYL9sj8Jnp6et0BkubLP31jhTG9vhL/F5uEZmg5wEzKoXp1kJslzPQWwPT1eyMiSxlKCgzHLOTOTQ==" crossorigin="anonymous"></script>
     <script src="{% static 'main.js' %}"></script>
 
 </body>
