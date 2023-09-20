@@ -41,6 +41,7 @@ ASGI_APPLICATION = f'{config("PROJECT_NAME")}.asgi.application'
 INSTALLED_APPS = [
     'daphne',
     'chessApp',
+    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
