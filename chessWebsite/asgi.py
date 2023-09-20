@@ -8,18 +8,10 @@ https://docs.djangoproject.com/en/4.2/howto/deployment/asgi/
 """
 
 import os
-
-from channels.auth import AuthMiddlewareStack
-from channels.routing import ProtocolTypeRouter, URLRouter
-from channels.security.websocket import AllowedHostsOriginValidator
+import django
+from channels.routing import get_default_application
 from decouple import config
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', f'{config("PROJECT_NAME")}.settings')
-
-import chessApp.routing
-
-application = ProtocolTypeRouter({
-    "websocket": AllowedHostsOriginValidator(
-            AuthMiddlewareStack(URLRouter(chessApp.routing.websocket_urlpatterns))
-        ),
-})
+django.setup()
+application = get_default_application()

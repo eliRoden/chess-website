@@ -31,7 +31,7 @@ ROOT_URLCONF = f'{config("PROJECT_NAME")}.urls'
 
 WSGI_APPLICATION = f'{config("PROJECT_NAME")}.wsgi.application'
 
-ASGI_APPLICATION = f'{config("PROJECT_NAME")}.asgi.application'
+ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 
 
 
