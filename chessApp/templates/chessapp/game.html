@@ -35,9 +35,9 @@
     const gameSocket = new WebSocket(
         'ws://'
         + window.location.host
+        + ':8001/'
         + '/ws/game/'
         + gameID
-        + '8001/'
     );
 
     gameSocket.onmessage = function(e) {
