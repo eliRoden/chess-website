@@ -9,7 +9,7 @@ application = ProtocolTypeRouter({
     "websocket": AllowedHostsOriginValidator(
             AuthMiddlewareStack(
                 URLRouter([
-                    path('game/<game_id>/', ChessConsumer),
+                    re_path(r"ws/game/(?P<game_id>\w+)/$", ChessConsumer.as_asgi()),
                 ])
             )
         ),

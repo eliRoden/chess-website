@@ -30,12 +30,15 @@ ALLOWED_HOSTS = ["159.223.138.190",]
 
 ROOT_URLCONF = f'{config("PROJECT_NAME")}.urls'
 
+WSGI_APPLICATION = f'{config("PROJECT_NAME")}.wsgi.application'
 
+ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 
 # Application definition
 
 INSTALLED_APPS = [
     'chessApp',
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -72,10 +75,6 @@ TEMPLATES = [
         },
     },
 ]
-
-WSGI_APPLICATION = f'{config("PROJECT_NAME")}.wsgi.application'
-
-ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 
 CHANNEL_LAYERS = {
     "default": {
@@ -140,6 +139,7 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 AWS_LOCATION = config('AWS_LOCATION')
+AWS_S3_SIGNATURE_VERSION='s3v4'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),

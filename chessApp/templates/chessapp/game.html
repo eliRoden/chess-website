@@ -31,11 +31,12 @@
   {{ game_id|json_script:"game-id" }}
   <script>
     const gameID = JSON.parse(document.getElementById('game-id').textContent);
-
-    const gameSocket = new WebSocket(
+    var gameSocket = new WebSocket(
         'ws://'
         + window.location.host
-        + ':8001/'
+        + ':8001/ws/game/'
+        + gameID
+        + '/'
     );
 
     gameSocket.onmessage = function(e) {
