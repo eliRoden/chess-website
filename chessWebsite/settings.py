@@ -38,13 +38,13 @@ ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 
 INSTALLED_APPS = [
     'chessApp',
-    'channels',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'channels',
     'django.contrib.humanize',
 ]
 
