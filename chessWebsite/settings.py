@@ -35,9 +35,6 @@ WSGI_APPLICATION = f'{config("PROJECT_NAME")}.wsgi.application'
 ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 
 
-AUTHENTICATION_BACKENDS = ( 
-    'django.contrib.auth.backends.AllowAllUsersModelBackend', 
-    )
 
 # Application definition
 
