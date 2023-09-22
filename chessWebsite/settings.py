@@ -35,16 +35,16 @@ WSGI_APPLICATION = f'{config("PROJECT_NAME")}.wsgi.application'
 ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 
 
-AUTH_USER_MODEL = 'account.Account'
 AUTHENTICATION_BACKENDS = ( 
     'django.contrib.auth.backends.AllowAllUsersModelBackend', 
-    'account.backends.CaseInsensitiveModelBackend',
     )
 
 # Application definition
 
 INSTALLED_APPS = [
+
     'chessApp',
+
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -139,6 +139,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+DATA_UPLOAD_MAX_MEMORY_SIZE = 10485760
 
 AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
@@ -148,7 +149,6 @@ AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
 AWS_LOCATION = config('AWS_LOCATION')
-AWS_S3_SIGNATURE_VERSION='s3v4'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
