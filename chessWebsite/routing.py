@@ -8,7 +8,7 @@ print('in asgi.py')
 application = ProtocolTypeRouter({
     "websocket": AllowedHostsOriginValidator(
                 URLRouter([
-                    path('game/<str:game_id>/', ChessConsumer),
+                    path('game/<str:game_id>/', ChessConsumer.as_asgi()),
                 ])
         ),
 })
