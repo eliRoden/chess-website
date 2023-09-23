@@ -7,7 +7,7 @@ from chessApp.consumers import ChessConsumer
 application = ProtocolTypeRouter({
     "websocket": AllowedHostsOriginValidator(
                 URLRouter([
-                    path('game/<str:game_id>/', ChessConsumer.as_asgi()),
+                    path('game/<str:game_id>/', ChessConsumer),
                 ])
         ),
 })
