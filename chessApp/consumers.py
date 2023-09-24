@@ -1,10 +1,10 @@
 import json
 from asgiref.sync import async_to_sync
-from channels.generic.websocket import WebsocketConsumer
+from channels.generic.websocket import AsyncJsonWebsocketConsumer
 from django.contrib import messages
 
 
-class ChessConsumer(WebsocketConsumer):
+class ChessConsumer(AsyncJsonWebsocketConsumer):
     def connect(self):
         print('entered consumer connect()')
         self.game_id = self.scope["url_route"]["kwargs"]["game_id"]
