@@ -39,6 +39,7 @@
         + gameID
         + '/'
     );
+    console.log('socket made')
 
     gameSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);

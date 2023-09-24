@@ -85,6 +85,7 @@ def move(request, game_id: str, move: str) -> redirect:
 
 
 def game(request, game_id: str):
+    print('in game view')
     if game_id == 'default':
         return render(request, 'chessapp/index.html')
 
@@ -93,7 +94,7 @@ def game(request, game_id: str):
         board = Board()
         board.game_id = game_id
         board.save()
-
+    print('board made')
     return render(request, 'chessapp/game.html', {
         'game_id': game_id,
         'board': board,
