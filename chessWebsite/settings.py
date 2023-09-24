@@ -37,7 +37,7 @@ ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 
 import logging
 
-LOG_FILE = os.path.join(BASE_DIR, 'logs', 'django.log')  
+LOG_FILE = os.path.join(BASE_DIR, 'django.log')  
 os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
 logging.basicConfig(
     level=logging.DEBUG, 
