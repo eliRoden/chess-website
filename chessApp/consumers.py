@@ -4,7 +4,7 @@ from asgiref.sync import async_to_sync
 import logging 
 
 logger = logging.getLogger('chessApp')
-
+logger.info("in consumers.py")
 class ChessConsumer(AsyncWebsocketConsumer):
     async def connect(self):
         logger.info('in consumer connect')
