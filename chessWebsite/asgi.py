@@ -4,11 +4,21 @@ defined in the ASGI_APPLICATION setting.
 """
 
 import os
-import django
-from decouple import config
-from channels.routing import get_default_application
 
+from channels.auth import AuthMiddlewareStack
+from channels.routing import ProtocolTypeRouter, URLRouter
+from channels.security.websocket import AllowedHostsOriginValidator
+from django.core.asgi import get_asgi_application
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", f'{config("PROJECT_NAME")}.settings')
-django.setup()
-application = get_default_application()
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'Chess.settings')
+
+django_asgi_app = get_asgi_application()
+
+import chessApp.routing
+
+application = ProtocolTypeRouter({
+    "http": django_asgi_app,
+    "websocket": AllowedHostsOriginValidator(
+            AuthMiddlewareStack(URLRouter(chessApp.routing.websocket_urlpatterns))
+        ),
+})

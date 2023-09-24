@@ -1,37 +1,41 @@
 import json
-from channels.generic.websocket import WebsocketConsumer
 from asgiref.sync import async_to_sync
-import logging 
+from channels.generic.websocket import WebsocketConsumer
+from django.contrib import messages
 
-logger = logging.getLogger('chessApp')
-logger.info("in consumers.py")
+
 class ChessConsumer(WebsocketConsumer):
-    async def connect(self):
-        logger.info('in consumer connect')
+    def connect(self):
         self.game_id = self.scope["url_route"]["kwargs"]["game_id"]
         self.game_group_name = "chat_%s" % self.game_id
 
-        await self.channel_layer.group_add(
+        async_to_sync(self.channel_layer.group_add)(
             self.game_group_name, self.channel_name
         )
 
-        await self.accept()
+        self.accept()
 
-    async def disconnect(self, close_code):
-        await self.channel_layer.group_discard(
+
+    def disconnect(self, close_code):
+        async_to_sync(self.channel_layer.group_discard)(
             self.game_group_name, self.channel_name
         )
 
-    async def receive(self, text_data):
+
+     # Receive message from WebSocket
+    def receive(self, text_data):
         text_data_json = json.loads(text_data)
         message = text_data_json["message"]
 
-        await self.channel_layer.group_send(
+        # Send message to room group
+        async_to_sync(self.channel_layer.group_send)(
             self.game_group_name, {"type": "run_game", "message": message}
         )
 
-    async def run_game(self, event):
+    # Receive message from room group
+    def run_game(self, event):
         message = event["message"]
 
-        await self.send(text_data=json.dumps({"message": message}))
+        # Send message to WebSocket
+        self.send(text_data=json.dumps({"message": message}))
 
