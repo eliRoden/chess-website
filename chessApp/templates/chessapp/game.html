@@ -41,6 +41,10 @@
     );
     console.log('socket made')
 
+    gameSocket.onopen = function (event) {
+      console.log('WebSocket connection opened:', event);
+    };
+
     gameSocket.onmessage = function(e) {
         const data = JSON.parse(e.data);
         window.location.pathname = 'game/' + gameID + '/move/' + data.message;
