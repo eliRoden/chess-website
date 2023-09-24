@@ -1,10 +1,14 @@
 import json
 from channels.generic.websocket import AsyncWebsocketConsumer
 from asgiref.sync import async_to_sync
+import logging 
+
+logger = logging.getLogger('chessApp')
 
 class ChessConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        print('entered consumer connect()')
+        logger.debug('in game view')
+        logger.info("in game view")
         self.game_id = self.scope["url_route"]["kwargs"]["game_id"]
         self.game_group_name = "chat_%s" % self.game_id
 

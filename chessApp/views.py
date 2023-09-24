@@ -6,6 +6,8 @@ import logging
 logger = logging.getLogger('chessApp')
 
 def index(request):
+    logger.debug('in game view')
+    logger.info("in game view")
     if request.method == "POST":
         game_id = request.POST.get('game_id')
         game = Board.objects.filter(game_id=game_id).first()
@@ -88,6 +90,7 @@ def move(request, game_id: str, move: str) -> redirect:
 
 def game(request, game_id: str):
     logger.debug('in game view')
+    logger.info("in game view")
     if game_id == 'default':
         return render(request, 'chessapp/index.html')
 
