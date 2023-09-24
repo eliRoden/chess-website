@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
 from .models import Board
 from .game_util import *
+import logging
 
+logger = logging.getLogger('chessApp')
 
 def index(request):
     if request.method == "POST":
@@ -85,7 +87,7 @@ def move(request, game_id: str, move: str) -> redirect:
 
 
 def game(request, game_id: str):
-    print('in game view')
+    logger.debug('in game view')
     if game_id == 'default':
         return render(request, 'chessapp/index.html')
 

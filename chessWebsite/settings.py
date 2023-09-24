@@ -35,12 +35,23 @@ WSGI_APPLICATION = f'{config("PROJECT_NAME")}.wsgi.application'
 ASGI_APPLICATION = f'{config("PROJECT_NAME")}.routing.application'
 
 
+import logging
 
-AUTHENTICATION_BACKENDS = ( 
-    'django.contrib.auth.backends.AllowAllUsersModelBackend', 
+LOG_FILE = os.path.join(BASE_DIR, 'logs', 'django.log')  
+os.makedirs(os.path.dirname(LOG_FILE), exist_ok=True)
+logging.basicConfig(
+    level=logging.DEBUG, 
+    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
+    filename=LOG_FILE,
 )
-# Application definition
+logger = logging.getLogger('chessApp') 
+console_handler = logging.StreamHandler()
+console_handler.setLevel(logging.DEBUG) 
+console_formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+console_handler.setFormatter(console_formatter)
+logger.addHandler(console_handler)
 
+# Application definition
 INSTALLED_APPS = [
 
     'chessApp',
