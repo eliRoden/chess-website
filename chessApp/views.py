@@ -92,14 +92,12 @@ def game(request, game_id: str):
     logger.info("in game view")
     if game_id == 'default':
         return render(request, 'chessapp/index.html')
-    logger.info('passed first check')
     board = Board.objects.filter(game_id=game_id).first()
-    logger.info('passed second check')
     if not board:
         board = Board()
         board.game_id = game_id
         board.save()
-    logger.info('board made')
+        logger.info('board made')
     return render(request, 'chessapp/game.html', {
         'game_id': game_id,
         'board': board,
