@@ -7,8 +7,7 @@ logger = logging.getLogger('chessApp')
 
 class ChessConsumer(AsyncWebsocketConsumer):
     async def connect(self):
-        logger.debug('in game view')
-        logger.info("in game view")
+        logger.info('in consumer connect')
         self.game_id = self.scope["url_route"]["kwargs"]["game_id"]
         self.game_group_name = "chat_%s" % self.game_id
 
