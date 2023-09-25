@@ -15,3 +15,7 @@ Technologies Used
 - Channels: Real-time communication and updates between players.
 - JavaScript: Front-end interactivity and real-time gameplay.
 - CSS: Responsive design for varying screen sizes.
+
+New hosted verison using Go: https://github.com/ethanewer/chess
+
+Available online at: https://multiplayerchessapp-u7ebr.ondigitalocean.app/
